@@ -1,0 +1,408 @@
+function init() {
+
+    $("#wizard-basic").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        autoFocus: true
+    });
+    
+   
+    
+    /* calendario datepicker  */
+    ;(function($){
+    	$.fn.datepicker.dates['it'] = {
+    		days: ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"],
+    		daysShort: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+    		daysMin: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+    		months: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
+    		monthsShort: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
+    		today: "Oggi",
+    		monthsTitle: "Mesi",
+    		clear: "Cancella",
+    		weekStart: 1,
+    		format: "dd/mm/yyyy"
+    	};
+    }(jQuery));
+    
+    $('.calendario').datepicker({
+    	language: 'it',
+    	orientation: "bottom",
+    	autoclose: true
+    });
+    
+    /* traduce la data del calendario nel formato per il database */
+    $('.date.calendario input').on("change", function() {
+    	var actual = $(this).parent().parent().find('.date.calendario input').val();
+    	var convertito = moment(actual, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    	$(this).parent().parent().find('.converted').val(convertito); 
+    });
+
+    sezione(sez);
+    
+    /* calendario datepicker - FINE */  
+    
+	$('#example').dataTable({
+		"bLengthChange": false,
+		"bFilter": false,
+		"language": {
+			"sEmptyTable":     "Nessun dato presente nella tabella",
+			"sInfo":           "Risultati da _START_ a _END_ di _TOTAL_ record",
+			"sInfoEmpty":      "Nessun dato presente nella tabella",
+			"sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+			"sInfoPostFix":    "",
+			"sInfoThousands":  ".",
+			"sLengthMenu":     "Visualizza _MENU_ elementi",
+			"sLoadingRecords": "Caricamento...",
+			"sProcessing":     "Elaborazione...",
+			"sSearch":         "Cerca:",
+			"sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+			"oPaginate": {
+				"sFirst":      "Primo",
+				"sPrevious":   "Precedente",
+				"sNext":       "Successivo",
+				"sLast":       "Ultimo"
+			},
+			"oAria": {
+				"sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
+				"sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+			}
+		}
+	});
+	
+	$('.tablePratiche').dataTable({
+		"bLengthChange": false,
+		"bFilter": true,
+		"order": [[ 0, "asc" ]],
+		"language": {
+			"sEmptyTable":     "Nessun dato presente nella tabella",
+			"sInfo":           "Risultati da _START_ a _END_ di _TOTAL_ record",
+			"sInfoEmpty":      "Nessun dato presente nella tabella",
+			"sInfoFiltered":   "(filtrati da _MAX_ elementi totali)",
+			"sInfoPostFix":    "",
+			"sInfoThousands":  ".",
+			"sLengthMenu":     "Visualizza _MENU_ elementi",
+			"sLoadingRecords": "Caricamento...",
+			"sProcessing":     "Elaborazione...",
+			"sSearch":         "Cerca:",
+			"sZeroRecords":    "La ricerca non ha portato alcun risultato.",
+			"oPaginate": {
+				"sFirst":      "Primo",
+				"sPrevious":   "Precedente",
+				"sNext":       "Successivo",
+				"sLast":       "Ultimo"
+			},
+			"oAria": {
+				"sSortAscending":  ": attiva per ordinare la colonna in ordine crescente",
+				"sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+			}
+		}
+	});
+	
+	
+	
+	
+};
+
+//===== Cambio colore subHeadeder ====
+function sezione(colore) {
+	
+	var categoria;
+	
+	switch(colore) {
+    case "blu":
+    case "gestioneContratto":
+    	categoria = "gestioneContratto";
+        break;
+        
+    case "giallo":
+    case "gestioneUtenze":
+    	categoria = "gestioneUtenze";
+        break;
+        
+    case "verde":
+    case "forum":
+    	categoria = "forum";
+        break;
+        
+    case "verdechiaro":
+    case "gestioneFatture":
+    	categoria = "gestioneFatture";
+        break;
+        
+    case "verdescuro":
+    case "tutelaConsumatori":
+    	categoria = "tutelaConsumatori";
+        break;
+    
+    case "arancione":
+    case "contatoreConsumi":
+    	categoria = "contatoreConsumi";
+        break;
+        
+    default:
+    	categoria = "default";
+	}
+	
+	//console.log(categoria);
+	$('.subHeader').addClass(categoria);
+}
+
+//===== Menu Switcher ====
+$(".menucaller").bind("click", function() {
+	switch_menu();
+});
+
+//===== Help Switcher ====
+$(".toggler").bind("click", function() {
+	switch_help();
+});
+
+
+//===== Scroll to Top ==== 
+$(window).scroll(function() {
+ if ($(this).scrollTop() >= 50) {        // If page is scrolled more than 50px
+     $('#return-to-top').fadeIn(200);    // Fade in the arrow
+ } else {
+     $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+ }
+});
+$('#return-to-top').click(function() {      // When arrow is clicked
+ $('body,html').animate({
+     scrollTop : 0                       // Scroll to top of body
+ }, 500);
+});
+
+//===== Percentuale Dashboard ====
+function setPercentage(percentage) {
+	text.innerHTML	=	percentage+' %';
+	percentage = 100 - percentage;
+	var new_length = (length / 100)*percentage
+	circle.style['stroke-dashoffset'] = new_length;
+}
+
+//===== iCheck ====
+$('input').iCheck({
+	checkboxClass: 'icheckbox_minimal-custom',
+	radioClass: 'iradio_minimal-custom',
+	increaseArea: '20%' // optional
+	});
+
+//===== owlCarousel ==== 
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:0,
+    nav:false,
+	items: 1,
+    autoplay:true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
+    smartSpeed: 1500 
+});
+
+
+// correzione bug di visualizzazione owlCarousel 
+function owlCarousel_resize() {
+	if ($('.owl-carousel').length) { 
+		var owl = $('.owl-carousel').data('owl.carousel');
+		owl.onResize();
+	}
+}
+
+//menu scroller
+$(window).on('resize', function(){
+	setMenuScroller();
+	setHelpScroller();
+});
+
+
+//===== Spinning busy Load Setup ==== 
+$.busyLoadSetup({ spinner: "cubes", background: "rgba(51, 102, 153, 0.7)" });
+
+$('.spinner').click(function() {	// When arrow is clicked
+	$.busyLoadFull("show");
+});
+
+$(".spinnerVerify").on("click", 
+	function(){ 
+	$.busyLoadFull("show");
+		
+	setTimeout(function(){ 
+			var err = $(".error");
+			var errField = $(".error-field");
+			if(err.length > 0 || errField.length > 0)
+				$.busyLoadFull("hide");
+		}, 500); 		
+			
+});
+
+var thSpinner = {
+    full: {
+    	start: function (){
+    		$.busyLoadFull("show");	
+    		return true;
+    	},
+    	stop: function(){
+    		$.busyLoadFull("hide");
+    		return true;
+    	}
+    },
+    div:{
+    	start: function (idDiv){
+    		$(idDiv).busyLoad("show");
+    		return true;
+    	},
+    	stop: function(idDiv){
+    		$(idDiv).busyLoad("hide");
+    		return true;
+    	}
+    }
+};
+
+//===== Avatar ==== 
+
+$('.btn_call').click(function() {	
+	$(this).addClass('hidden');
+	$('.btn_action').removeClass('hidden');
+	
+	setTimeout(function(){ avatar_reset(); }, 10000);
+});
+
+$('#avatar_aqpRisponde').click(function() {
+	
+	var x = false;
+	Liferay.Service(
+	  '/external.mobile.services-portlet.app/get-chat',
+	  {
+	    stato: '1'
+	  },
+	  function(obj) {
+		if(obj.risposta ==='OK'){
+			console.log("Risposta OPEN chat "+obj.risposta);
+			x= true;
+			chatOpen();
+		}else{
+			console.log("Risposta "+obj.risposta);
+			x= false;
+			$("#modBody").text(obj.descrizioneEsito);
+			$('#myModalChat').modal('show');
+		}
+	  }
+	);
+});
+
+function closeChat(){
+	console.log("sono in closeChat");
+	Liferay.Service(
+			  '/external.mobile.services-portlet.app/get-chat',
+			  {
+			    stato: '0'
+			  },
+			  function(obj) {
+				console.log("Risposta CLOSE Chat"+obj.risposta);
+				var message = 'Important: Please click on \'Save\' button to leave this page.';
+		    	if (typeof event == 'undefined') {
+		    	event = window.event;
+		    	}
+		    	if (event) {
+		    	event.returnValue = message;
+		    	}
+		    	return message;
+		    	}
+			);
+}
+
+
+function chatOpen(){
+	var args ="";
+	
+	 var width = 600, height = 600,
+    left = (screen.width - width) / 2,
+    top = (screen.height - height) / 2;
+
+	 // load chat window and begin chatting
+	 window.open('/AQP-theme/lib/chat/chatuser.htm' + (args || ''), 'chatWindow',
+	             'width=' + width + ', height=' + height + ', ' +
+	             'left=' + left + ', top=' + top + ', ' +
+	             'location=no, menubar=no, status=no, toolbar=no');
+}
+
+
+function updateTips( t ) {
+	$( ".errorText" )
+      .text( $( ".errorText" ).text()+ " "+t )
+      .addClass( "ui-state-highlight" );
+    setTimeout(function() {
+    	$( ".errorText" ).removeClass( "ui-state-highlight", 1500 );
+    }, 500 );
+  }
+
+function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+      o.addClass( "ui-state-error" );
+      updateTips( "Lunghezza del campo " + n + " deve essere compresa tra" +
+        min + " e " + max + "." );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function checkRegexp( o, regexp, n ) {
+    if ( !( regexp.test( o.val() ) ) ) {
+      o.addClass( "ui-state-error" );
+      updateTips( n );
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
+
+function addCallmeRequest() {
+    var valid = true;
+    $( ".validateTips" ).html("Tutti i campi sono obbligatori");
+    
+    var name = $( "#datiUtente" );
+    var telefono = $( "#telefono" );
+    var allFields = $( [] ).add( name ).add( telefono );
+    allFields.removeClass( "ui-state-error" );
+    var tips = $( ".validateTips" );
+    
+    
+    
+    valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_'\s])+$/i, "Nome deve contenere lettere numeri o spazi ma iniziare con una lettera" );
+    valid = valid && checkLength( telefono, "Telefono", 8, 11 );
+    valid = valid && checkRegexp( telefono, /^([0-9])+$/, "Telefono deve contenere solo numeri" );
+
+    if ( valid ) {
+    	Liferay.Service(
+    			  '/external-services-portlet.callmeback/save-callme-request',
+    			  {
+    			    datiUtente: name.val(),
+    			    telefono: telefono.val()
+    			  },
+    			  function(obj) {
+    				  //console.log(obj);
+    				  //alert("Richiesta inviata con successo");
+    				  $('#dialog-callme-request').modal('hide');
+    				  $('#dialog-callme-request-success').modal('show');
+    			  }
+    			);
+    }
+}
+
+
+$('#avatar_contattaci').click(function() {
+	//$('#dialog-callme-request').modal('show');
+	$('.errorText').html('');
+	$('#datiUtente').val('');
+	$('#telefono').val('');
+});
+
+function avatar_reset() {
+	$('.btn_action').addClass('hidden');
+	$('.btn_call').removeClass('hidden');
+}
+
