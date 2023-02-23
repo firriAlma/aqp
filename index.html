@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html class="aui ltr" dir="ltr" lang="it-IT">
 <head>
-	<link rel="stylesheet" type="text/css" href="style/styles/comune-bergamo-chatbot-override.css" media="screen" />
     <meta charset="utf-8">
     <title>Home - AQP Sportello On Line</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
     <link href="https://aqpfacile.aqp.it/AQP-theme/images/favicon.ico" rel="Shortcut Icon"/>
     <link href="https&#x3a;&#x2f;&#x2f;aqpfacile&#x2e;aqp&#x2e;it" rel="canonical"/>
@@ -2248,155 +2247,163 @@ $(".btn-recuperocrediti").on("click", function (a) {
 <script src="https://aqpfacile.aqp.it/AQP-theme/lib/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="https://aqpfacile.aqp.it/AQP-theme/js/init.js"></script>
 <script src="https://aqpfacile.aqp.it/AQP-theme/js/aqp.js"></script>
+<style type='text/css'>
+    .embeddedServiceHelpButton .helpButton .uiButton {
+        background-color: #005290;
+        font-family: "Arial", sans-serif;
+    }
+    .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 1px solid #005290;
+    }
+</style>
 
-	
-	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
-	<script type='text/javascript'>
-	       var initESW = function(gslbBaseURL) {
-	             embedded_svc.settings.displayHelpButton = true; //Or false
-	             embedded_svc.settings.language = 'it'; //For example, enter 'en' or 'en-US'
-	
-	             embedded_svc.settings.enabledFeatures = ['LiveAgent'];
-	             embedded_svc.settings.entryFeature = 'LiveAgent';
-	
-	    embedded_svc.settings.defaultMinimizedText = 'Richiedi Assistenza'; //(Defaults to Chat with an Expert)
-	             embedded_svc.settings.disabledMinimizedText = 'Assistente Offline'; //(Defaults to Agent Offline)
-	             
-	         embedded_svc.init(
-              'https://newcrm-aqp--dev.sandbox.my.salesforce.com',
-              'https://newcrm-aqp--dev.sandbox.my.site.com/ChatbotAQP',
-              gslbBaseURL,
-              '00D1x0000000O6t',
-              'AssistenzaAqp',
-              {
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+    var initESW = function(gslbBaseURL) {
+        embedded_svc.settings.displayHelpButton = true; //Or false
+        embedded_svc.settings.language = 'it'; //For example, enter 'en' or 'en-US'
+
+        embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+        embedded_svc.settings.entryFeature = 'LiveAgent';
+
+        embedded_svc.settings.defaultMinimizedText = 'Richiedi Assistenza'; //(Defaults to Chat with an Expert)
+        embedded_svc.settings.disabledMinimizedText = 'Assistente Offline'; //(Defaults to Agent Offline)
+
+        embedded_svc.init(
+            'https://newcrm-aqp--dev.sandbox.my.salesforce.com',
+            'https://newcrm-aqp--dev.sandbox.my.site.com/ChatbotAQP',
+            gslbBaseURL,
+            '00D1x0000000O6t',
+            'AssistenzaAqp',
+            {
                 baseLiveAgentContentURL: 'https://c.la1-c1cs-fra.salesforceliveagent.com/content',
                 deploymentId: '5721x00000006qT',
                 buttonId: '5731x00000001R6',
                 baseLiveAgentURL: 'https://d.la1-c1cs-fra.salesforceliveagent.com/chat',
                 eswLiveAgentDevName: 'AssistenzaAqp',
                 isOfflineSupportEnabled: false
-              }
-      );
-	
-	       
-	             embedded_svc.settings.extraPrechatFormDetails = [
-	                    {
-	                    "label":"First Name",
-	            "value" : "Giulia",                  //@SOGEI -> Inserire Variabile contenente il Nome dell'utente
-	                    "displayToAgent": true
-	                    },
-	                    {
-	                    "label":"Last Name",
-	                    "value" : "Pinna",                 //@SOGEI -> Inserire Variabile contenente il Cognome dell'utente
-	                    "displayToAgent": false
-	                    },
-	            
-	            /*
-	            {
-	                    "label": "RecordTypeId",
-	                    "value": "0122o000000Nxy1AAC",
-	                    "displayToAgent": false
-	                    },
-	            */
-	            
-	                    {
-	                    "label": "Telefono",
-	            "value": "3409827546",
-	                    "displayToAgent": true
-	                    },
-	                    {
-	                    "label": "Email",
-	            "value": "a.mariniello@almaviva.it",
-
-	                    "displayToAgent": true
-	                    },
-	            
-	      /*    
-	                    {
-	                    "label": "Fiscal Code",
-	                    "value": "PNNGLI89L63B354R", //@SOGEI -> Inserire Variabile contenente il CF dell'utente
-	                    "displayToAgent": false     
-	                    },
-	      */
-	      
-	             
-	        ];
-	
-	
-	        embedded_svc.settings.extraPrechatInfo = [
-	            
-	            //CONTACT
-	            {
-	                "entityName": "Contact",
-	                "saveToTranscript": "ContactId",
-	                "entityFieldMaps": [
-	                      /*      
-	                    {
-	                        "isExactMatch":true,
-	                        "fieldName":"Fiscal_Code__c",
-	                        "doCreate":true,
-	                        "doFind":true,
-	                        "label":"Codice Fiscale"  
-	                    },
-	                    */
-	                    
-	                    {
-	                        "isExactMatch":false,
-	                        "fieldName":"LastName",
-	                        "doCreate":true,
-	                        "doFind":false,
-	                        "label":"Cognome"
-	                    },
-	                    {
-	                        "isExactMatch":false,
-	                        "fieldName":"FirstName",
-	                        "doCreate":true,
-	                        "doFind":false,
-	                        "label":"Nome"
-	                    },
-	                    {
-	                        "isExactMatch":true,
-	                        "fieldName":"Email",
-	                        "doCreate":true,
-	                        "doFind":true,
-	                        "label":"Email"
-	                    },
-	                    {
-	                        "isExactMatch":false,
-	                        "fieldName":"Phone",
-	                        "doCreate":true,
-	                        "doFind":false,
-	                        "label":"Telefono"
-	                    }
-	                ]
-	            },
-	               
-	        ];
-	
-	                    embedded_svc.settings.prepopulatedPrechatFields = {
-	                    FirstName: "Giulia",                                   //@SOGEI -> Inserire Variabile contenente il Nome dell'utente
-	                    LastName: "Pinna",                              //@SOGEI -> Inserire Variabile contenente il Cognome dell'utente
-	               // Fiscal_Code__c: "PNNGLI89L63B354R",           //@SOGEI -> Inserire Variabile contenente il CF dell'utente
-	            Phone: "3409827546",                                                   //@SOGEI -> Inserire Variabile contenente il Phone dell'utente
-	            Email: "a.mariniello@almaviva.it"                                                      //@SOGEI -> Inserire Variabile contenente l email dell'utente
-	             };
-	
-	       };
-	
-	       if (!window.embedded_svc) {
-	             var s = document.createElement('script');
-	              s.setAttribute('src', 'https://newcrm-aqp--dev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-	             s.onload = function() {
-	                    initESW(null);
-	             };
-	             document.body.appendChild(s);
-	       } else {
-	             initESW('https://service.force.com');
-	       }
-	</script>
+            }
+        );
 
 
- 
+        embedded_svc.settings.extraPrechatFormDetails = [
+            {
+                "label":"First Name",
+                "value" : "Roberto",                  //@SOGEI -> Inserire Variabile contenente il Nome dell'utente
+                "displayToAgent": true
+            },
+            {
+                "label":"Last Name",
+                "value" : "Testa",                 //@SOGEI -> Inserire Variabile contenente il Cognome dell'utente
+                "displayToAgent": false
+            },
+
+            /*
+            {
+                    "label": "RecordTypeId",
+                    "value": "0122o000000Nxy1AAC",
+                    "displayToAgent": false
+                    },
+            */
+
+            {
+                "label": "Telefono",
+                "value": "3409827546",
+                "displayToAgent": true
+            },
+            {
+                "label": "Email",
+                "value": "f.irrissuto@almaviva.it",
+
+                "displayToAgent": true
+            },
+
+            /*    
+                          {
+                          "label": "Fiscal Code",
+                          "value": "PNNGLI89L63B354R", //@SOGEI -> Inserire Variabile contenente il CF dell'utente
+                          "displayToAgent": false     
+                          },
+            */
+
+
+        ];
+
+
+        embedded_svc.settings.extraPrechatInfo = [
+
+            //CONTACT
+            {
+                "entityName": "Contact",
+                "saveToTranscript": "ContactId",
+                "entityFieldMaps": [
+                    /*      
+                  {
+                      "isExactMatch":true,
+                      "fieldName":"Fiscal_Code__c",
+                      "doCreate":true,
+                      "doFind":true,
+                      "label":"Codice Fiscale"  
+                  },
+                  */
+
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"LastName",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Cognome"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"FirstName",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Nome"
+                    },
+                    {
+                        "isExactMatch":true,
+                        "fieldName":"Email",
+                        "doCreate":true,
+                        "doFind":true,
+                        "label":"Email"
+                    },
+                    {
+                        "isExactMatch":false,
+                        "fieldName":"Phone",
+                        "doCreate":true,
+                        "doFind":false,
+                        "label":"Telefono"
+                    }
+                ]
+            },
+
+        ];
+
+        embedded_svc.settings.prepopulatedPrechatFields = {
+            FirstName: "Roberto",                                   //@SOGEI -> Inserire Variabile contenente il Nome dell'utente
+            LastName: "Testa",                              //@SOGEI -> Inserire Variabile contenente il Cognome dell'utente
+            // Fiscal_Code__c: "PNNGLI89L63B354R",           //@SOGEI -> Inserire Variabile contenente il CF dell'utente
+            Phone: "3409827546",                                                   //@SOGEI -> Inserire Variabile contenente il Phone dell'utente
+            Email: "f.irrissuto@almaviva.it"                                                      //@SOGEI -> Inserire Variabile contenente l email dell'utente
+        };
+
+    };
+
+    if (!window.embedded_svc) {
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://newcrm-aqp--dev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+        s.onload = function() {
+            initESW(null);
+        };
+        document.body.appendChild(s);
+    } else {
+        initESW('https://service.force.com');
+    }
+</script>
+
+
+
 
 
 
