@@ -2252,6 +2252,7 @@ $(".btn-recuperocrediti").on("click", function (a) {
         background-color: #005290;
         font-family: "Arial", sans-serif;
     }
+
     .embeddedServiceHelpButton .helpButton .uiButton:focus {
         outline: 1px solid #005290;
     }
@@ -2259,7 +2260,7 @@ $(".btn-recuperocrediti").on("click", function (a) {
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
-    var initESW = function(gslbBaseURL) {
+    var initESW = function (gslbBaseURL) {
         embedded_svc.settings.displayHelpButton = true; //Or false
         embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 
@@ -2296,13 +2297,13 @@ $(".btn-recuperocrediti").on("click", function (a) {
                 isOfflineSupportEnabled: false
             }
         );
-        
+
     };
 
     if (!window.embedded_svc) {
         var s = document.createElement('script');
         s.setAttribute('src', 'https://newcrm-aqp--dev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
-        s.onload = function() {
+        s.onload = function () {
             initESW(null);
         };
         document.body.appendChild(s);
