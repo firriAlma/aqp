@@ -2296,7 +2296,109 @@ $(".btn-recuperocrediti").on("click", function (a) {
 				isOfflineSupportEnabled: false
 			}
 		);
-	};
+	embedded_svc.settings.extraPrechatFormDetails = [
+	                    {
+	                    "label":"First Name",
+	            "value" : "Giulia",                  //@SOGEI -> Inserire Variabile contenente il Nome dell'utente
+	                    "displayToAgent": true
+	                    },
+	                    {
+	                    "label":"Last Name",
+	                    "value" : "Pinna",                 //@SOGEI -> Inserire Variabile contenente il Cognome dell'utente
+	                    "displayToAgent": false
+	                    },
+	            
+	            /*
+	            {
+	                    "label": "RecordTypeId",
+	                    "value": "0122o000000Nxy1AAC",
+	                    "displayToAgent": false
+	                    },
+	            */
+	            
+	                    {
+	                    "label": "Telefono",
+	            "value": "3409827546",
+	                    "displayToAgent": true
+	                    },
+	                    {
+	                    "label": "Email",
+	            "value": a.mariniello@almaviva.it,
+
+	                    "displayToAgent": true
+	                    },
+	            
+	      /*    
+	                    {
+	                    "label": "Fiscal Code",
+	                    "value": "PNNGLI89L63B354R", //@SOGEI -> Inserire Variabile contenente il CF dell'utente
+	                    "displayToAgent": false     
+	                    },
+	      */
+	      
+	             
+	        ];
+	
+	
+	        embedded_svc.settings.extraPrechatInfo = [
+	            
+	            //CONTACT
+	            {
+	                "entityName": "Contact",
+	                "saveToTranscript": "ContactId",
+	                "entityFieldMaps": [
+	                      /*      
+	                    {
+	                        "isExactMatch":true,
+	                        "fieldName":"Fiscal_Code__c",
+	                        "doCreate":true,
+	                        "doFind":true,
+	                        "label":"Codice Fiscale"  
+	                    },
+	                    */
+	                    
+	                    {
+	                        "isExactMatch":false,
+	                        "fieldName":"LastName",
+	                        "doCreate":true,
+	                        "doFind":false,
+	                        "label":"Cognome"
+	                    },
+	                    {
+	                        "isExactMatch":false,
+	                        "fieldName":"FirstName",
+	                        "doCreate":true,
+	                        "doFind":false,
+	                        "label":"Nome"
+	                    },
+	                    {
+	                        "isExactMatch":true,
+	                        "fieldName":"Email",
+	                        "doCreate":true,
+	                        "doFind":true,
+	                        "label":"Email"
+	                    },
+	                    {
+	                        "isExactMatch":false,
+	                        "fieldName":"Phone",
+	                        "doCreate":true,
+	                        "doFind":false,
+	                        "label":"Telefono"
+	                    }
+	                ]
+	            },
+	               
+	        ];
+	
+	                    embedded_svc.settings.prepopulatedPrechatFields = {
+	                    FirstName: "Giulia",                                   //@SOGEI -> Inserire Variabile contenente il Nome dell'utente
+	                    LastName: "Pinna",                              //@SOGEI -> Inserire Variabile contenente il Cognome dell'utente
+	               // Fiscal_Code__c: "PNNGLI89L63B354R",           //@SOGEI -> Inserire Variabile contenente il CF dell'utente
+	            Phone: "3409827546",                                                   //@SOGEI -> Inserire Variabile contenente il Phone dell'utente
+	            Email: a.mariniello@almaviva.it                                                      //@SOGEI -> Inserire Variabile contenente l email dell'utente
+	             };
+	
+	       };
 
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
